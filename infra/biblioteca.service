@@ -1,0 +1,28 @@
+[Unit]
+Description=API REST Biblioteca (Spring Boot) - Acceso a datos 2 DAM
+# After: orden (la API arranca después de MySQL y de la red)
+After=network-online.target mysql.service
+Wants=network-online.target
+# Requires: dependencia fuerte; si MySQL no arranca o se para, la API también
+Requires=mysql.service
+
+[Service]
+# Usuario de sistema propio, sin consola ni home: nunca como root
+User=biblioteca
+Group=biblioteca
+WorkingDirectory=/opt/biblioteca
+# Variables (JAVA_OPTS, contraseña, variante...); el fichero solo lo lee root
+EnvironmentFile=/etc/biblioteca/biblioteca.env
+ExecStart=/usr/bin/java $JAVA_OPTS -jar /opt/biblioteca/biblioteca.jar
+# Java sale con 143 (128 + SIGTERM) al pararlo: no es un fallo
+SuccessExitStatus=143
+Restart=on-failure
+RestartSec=10
+# Endurecimiento
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target
