@@ -1,0 +1,8 @@
+package es.florida.biblioteca.excepcion;
+
+/** El recurso de la URL no existe -> 404. */
+public class RecursoNoEncontradoException extends RuntimeException {
+    public RecursoNoEncontradoException(String mensaje) {
+        super(mensaje);
+    }
+}
