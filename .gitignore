@@ -1,0 +1,6 @@
+# Claves y secretos: NUNCA al repositorio
+*.pem
+*.env
+
+# Compilados de Maven
+target/
