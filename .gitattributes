@@ -1,0 +1,8 @@
+# Ficheros que se ejecutan en la instancia Linux: siempre con fin de línea LF
+*.sh       text eol=lf
+*.sql      text eol=lf
+*.cnf      text eol=lf
+*.service  text eol=lf
+*.env.plantilla text eol=lf
+# Script de PowerShell para el puesto
+*.ps1      text eol=crlf
