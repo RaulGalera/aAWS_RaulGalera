@@ -1,0 +1,12 @@
+# /etc/mysql/mysql.conf.d/zz-biblioteca.cnf
+# El prefijo zz- hace que se lea el último y prevalezca sobre los valores por defecto.
+[mysqld]
+# Solo conexiones desde la propia máquina (segunda barrera tras el security group)
+bind-address = 127.0.0.1
+mysqlx-bind-address = 127.0.0.1
+# Caché de InnoDB: cabe la BD entera sin quitar memoria a la JVM
+innodb_buffer_pool_size = 256M
+# Pool de la API (5) + administración, con margen; cada conexión gasta memoria
+max_connections = 40
+# Ahorra ~100-200 MB de memoria; no usamos sus estadísticas
+performance_schema = OFF
