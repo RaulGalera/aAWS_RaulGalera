@@ -2,9 +2,10 @@
 Description=API REST Biblioteca (Spring Boot) - Acceso a datos 2 DAM
 # After: orden (la API arranca después de MySQL y de la red)
 After=network-online.target mysql.service
-Wants=network-online.target
-# Requires: dependencia fuerte; si MySQL no arranca o se para, la API también
-Requires=mysql.service
+# Wants: dependencia débil. Decisión tras la cuestión 2: con Requires=, al parar MySQL
+# systemd paraba también la API y el cliente recibía "connection refused"; con Wants= la API
+# sigue viva, responde 503 explicativo y se recupera sola cuando vuelve MySQL.
+Wants=network-online.target mysql.service
 
 [Service]
 # Usuario de sistema propio, sin consola ni home: nunca como root
